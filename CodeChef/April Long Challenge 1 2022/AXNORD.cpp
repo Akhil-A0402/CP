@@ -8,9 +8,9 @@ int main() {
 	cin>>t;
 	
 	while(t--){
-	    int n;
+	    long long int n;
         cin>>n;
-	    int b=1;
+	    // int b=1;
         if(n%2==0){
             if(n%4==0){
                 cout<<3*(n/4+1)+n/4<<"\n";
