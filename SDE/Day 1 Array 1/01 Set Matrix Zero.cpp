@@ -1,35 +1,56 @@
-#include<iostream>
-#include<vector>
-#include<string>
-#include<stack>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-void makeingZero(vector<vector<int>> arr,int i,int j){
-    for(int k=0;k<arr.size(),k++){
-        arr[i][k]=0;
+void setZero(vector<vector<int>> &matrix){
+    int row=matrix.size(), col = matrix[0].size();
+    for(int i=0;i<row;i++){
+        for(int j=0;j<col;j++){
+            if(matrix[i][j]==0){
+                int ind = i-1;
+                while(ind>=0){
+                    if(matrix[ind][j]!=0){
+                        matrix[ind][j]=-1;
+                    }
+                    ind--;
+                }
+                ind=i+1;
+                while(ind<row){
+                    if(matrix[ind][j]!=0){
+                        matrix[ind][j]=-1;
+                    }
+                    ind++;
+                }
+                ind=j-1;
+                while(ind>=0){
+                    if(matrix[i][ind]!=0){
+                        matrix[i][ind]=-1;
+                    }
+                    ind--;
+                }
+                while(ind<col){
+                    if(matrix[i][ind]!=0){
+                        matrix[i][ind]=-1;
+                    }
+                    ind++;
+                }
+            }
+        }
     }
-    for(int k=0;k<arr[0].size(), k++){
-        arr[k][j]=0;
-    }
+    for(int i=0;i<row;i++)
+        for(int j=0;j<col;j++)
+            if(matrix[i][j]==-1)
+                matrix[i][j]=0;
 }
 
 int main(){
-    vector<vector<int>> arr;
-    arr = {{1,1,1},{1,0,1},{1,1,1}};
-
-    for(int i=0;i<arr.size();i++){
-        for(int j=0;j<arr[i].size();j++){
-            if(arr[i][j]==0);
-                makeingZero(arr,i, j);
-        }
-    }
-
-    for(int i=0;i<arr.size(),i++){
-        for(int j=0;j<arr[i].size();j++)
-            cout<<arr[i][j]<<" ";
+    vector<vector<int>> matrix;
+    matrix = {{0,1,2,0},{3,4,5,2},{1,3,1,5}};
+    setZero(matrix);
+    for(int i=0;i<matrix.size();i++){
+        for(int j=0;j<matrix[0].size();j++)
+            cout<<matrix[i][j]<<"\t";
         cout<<"\n";
     }
-    
-
     return 0;
 }
